@@ -43,21 +43,19 @@ inputData.addEventListener("submit", (e) => {
 
 function buttonAction() {
   document.querySelectorAll(".button-container").forEach((e) => {
-    e.addEventListener("click", (event) => {
-      const targetElement = event.target;
-      if (targetElement.innerHTML === `<i class="fa-solid fa-trash"></i>`) {
-        return targetElement.parentNode.parentNode.remove();
+    e.addEventListener("click", (el) => {
+      let scorePlayer = el.target.parentElement.parentElement.children[2];
+
+      if (el.target.parentElement.classList.contains("delete")) {
+        return el.target.parentElement.parentElement.parentElement.remove();
       }
+      if (el.target.classList.contains("incDec")) {
+        let textContent = el.target.innerText;
+        if (textContent.length > 2) return;
 
-      if (targetElement.textContent > 2) {
-        return;
+        scorePlayer.innerText =
+          parseInt(scorePlayer.innerText) + parseInt(textContent);
       }
-
-      let text = targetElement.parentNode.parentNode.children[2];
-
-      text.textContent =
-        parseInt(text.textContent) + parseInt(targetElement.innerText);
-
       sortList();
     });
   });
