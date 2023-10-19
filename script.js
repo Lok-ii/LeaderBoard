@@ -1,36 +1,83 @@
-let details = [
-  { firstName: "LOKESH", lastName: "KATARIA", Country: "INDIA", Score: "100" },
-  { firstName: "JOHN", lastName: "DOE", Country: "USA", Score: "85" },
-  { firstName: "JANE", lastName: "SMITH", Country: "CANADA", Score: "97" },
-];
+let error = document.querySelector(".fields");
+let inputData = document.querySelector("form");
 
-let dataBody = document.querySelector(".leaderboard");
+inputData.addEventListener("submit", (e) => {
+  e.preventDefault();
+  let fName = e.target.children[0].value,
+    lName = e.target.children[1].value,
+    country = e.target.children[2].value,
+    score = e.target.children[3].value;
 
-let addPeople = (list = details) => {
-  sortList(list);
-  let rank = 1;
-  dataBody.innerHTML = "";
-  list.forEach((e) => {
+  if (fName === "" || lName === "" || country === "" || score === "") {
+    return (error.style.display = "block");
+  } else if (score.length <= 2 || score === "100") {
+    error.style.display = "none";
+    let continer = document.querySelector(".leaderboard");
     let dataRow = document.createElement("div");
 
-    dataRow.innerHTML = `<span class="rank">${rank++}</span>
+    dataRow.innerHTML = `
     <div>
-      <span class="name">${e.firstName} ${e.lastName}</span>
+      <span class="name">${fName} ${lName}</span>
       <p class="currentDate">${currentDate()}</p>
     </div>        
-    <span class= "country">${e.Country}</span>
-    <span class="score">${e.Score}</span>
-    <button class="delete"><i class="fa-solid fa-trash"></i></button>
-    <button class="incDec">+5</button>
-    <button class="incDec">-5</button>`;
+    <span class= "country">${country}</span>
+    <span class="score">${score}</span>
+    <div class="button-container">
+      <button class="delete"><i class="fa-solid fa-trash"></i></button>
+      <button class="incDec">+5</button>
+      <button class="incDec">-5</button>
+    </div>
+      `;
 
-    dataBody.appendChild(dataRow);
+    continer.appendChild(dataRow);
     dataRow.classList.add("leaderboard-item");
-  });
-};
+    e.target.children[0].value = "";
+    e.target.children[1].value = "";
+    e.target.children[2].value = "";
+    e.target.children[3].value = "";
 
-let sortList = (list = details) => {
-  return list.sort((a, b) => Number(b.Score) - Number(a.Score));
+    sortList();
+    buttonAction();
+  }
+});
+
+function buttonAction() {
+  document.querySelectorAll(".button-container").forEach((e) => {
+    e.addEventListener("click", (event) => {
+      const targetElement = event.target;
+      if (targetElement.innerHTML === `<i class="fa-solid fa-trash"></i>`) {
+        return targetElement.parentNode.parentNode.remove();
+      }
+
+      if (targetElement.textContent > 2) {
+        return;
+      }
+
+      let text = targetElement.parentNode.parentNode.children[2];
+
+      text.textContent =
+        parseInt(text.textContent) + parseInt(targetElement.innerText);
+
+      sortList();
+    });
+  });
+}
+
+buttonAction();
+
+let sortList = () => {
+  let container = document.querySelector(".leaderboard");
+  let rows = document.querySelectorAll(".leaderboard-item");
+  let newList = [];
+  rows.forEach((el) => newList.push(el));
+
+  let sortedList = newList.map((e) => e);
+
+  sortedList.sort(
+    (a, b) => b.children[2].textContent - a.children[2].textContent
+  );
+
+  sortedList.forEach((el) => container.appendChild(el));
 };
 
 let currentDate = function dateAndTime() {
@@ -60,63 +107,3 @@ let currentDate = function dateAndTime() {
 
   return result;
 };
-
-addPeople();
-
-let error = document.querySelector(".fields");
-let inputData = document.querySelector("form");
-
-inputData.addEventListener("submit", (e) => {
-  e.preventDefault();
-  let fName = e.target.children[0].value,
-    lName = e.target.children[1].value,
-    country = e.target.children[2].value,
-    score = e.target.children[3].value;
-
-  if (fName === "" || lName === "" || country === "" || score === "") {
-    error.style.display = "block";
-  } else {
-    error.style.display = "none";
-    let newPerson = {
-      firstName: fName.toUpperCase(),
-      lastName: lName.toUpperCase(),
-      Country: country.toUpperCase(),
-      Score: score,
-    };
-    details.push(newPerson);
-    e.target.children[0].value = "";
-    e.target.children[1].value = "";
-    e.target.children[2].value = "";
-    e.target.children[3].value = "";
-    addPeople();
-  }
-});
-
-let deleteButtons = document.querySelectorAll(".delete");
-deleteButtons.forEach((e) => {
-  e.addEventListener("click", () => {
-    e.parentElement.remove();
-  });
-});
-
-
-let changeScore = document.querySelectorAll(".incDec");
-
-let addOrRemove = (i, newScore) => {
-  console.log("hello");
-  console.log(newScore);
-  if (i % 2 == 0) {
-    newScore += 5;
-  } else {
-    newScore -= 5;
-  }
-  details[Math.ceil(i / 2)].Score = newScore;
-  addPeople();
-  i++;
-}
-
-changeScore.forEach((element, i) => {
-  let newScore = parseInt(details[Math.ceil(i / 2)].Score);
-  element.addEventListener("click", addOrRemove(i, newScore));
-});
-

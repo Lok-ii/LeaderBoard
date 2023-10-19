@@ -98,23 +98,14 @@ input:focus{
   height: 80px;
 }
 
+.name{
+  font-weight: 500;
+}
+
 .leaderboard-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
-}
-
-.leaderboard-item .rank {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  color: #ffffff;
-  border-radius: 50%;
-  background-color: #4caf50;
-  margin-right: 20px;
 }
 
 .currentDate{
@@ -126,6 +117,12 @@ input:focus{
   font-size: 0.825rem;
 }
 
+.button-container{
+  width: 15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 button{
   font-family: "Montserrat", sans-serif;
