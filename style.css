@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding-top: 4rem;
+}
+
+.addData{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.addData h1{
+  font-size: 3rem;
+  font-weight: 500;
+  color: #28a745;
+}
+
+form{
+  width: 70%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+input{
+  font-family: "Montserrat", sans-serif;
+  height: 2.5rem;
+  border: 1px solid #28a745;
+  outline: none;
+  border-radius: 0.4rem;
+  padding: 0.5rem;
+  background-color: #d5f5e3;
+}
+
+input:focus{
+  background-color: white;
+}
+
+#submit{
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.6rem 2.5rem;
+  border-radius: 0.4rem;
+  /* font-weight: 600; */
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.fields{
+  color: rgb(220, 87, 87);
+  font-weight: 600;
+  display: none;
+}
+
+.leaderboard {
+  width: 100%;
+  max-width: 80%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.leaderboard-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem;
+  background-color: #d5f5e3;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  height: 80px;
+}
+
+.leaderboard-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+}
+
+.leaderboard-item .rank {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #ffffff;
+  border-radius: 50%;
+  background-color: #4caf50;
+  margin-right: 20px;
+}
+
+.currentDate{
+  font-size: 0.625rem;
+  font-weight: 500;
+}
+
+.country{
+  font-size: 0.825rem;
+}
+
+
+button{
+  font-family: "Montserrat", sans-serif;
+  background-color: transparent;
+  padding: 0.5rem 0.6rem;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover{
+  background-color: #d5f5e3;
+}
