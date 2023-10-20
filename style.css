@@ -40,6 +40,7 @@ form{
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
+  gap: 0.8rem;
 }
 
 input{
@@ -95,7 +96,7 @@ input:focus{
   margin-bottom: 15px;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  height: 80px;
+  height: 5rem;
 }
 
 .name{
@@ -140,4 +141,45 @@ button:hover{
 .del{
   width: 100%;
   height: 100%;
+}
+
+
+@media screen and (max-width: 769px){
+    form{
+      flex-direction: column;
+      gap: 0.7rem;
+      width: 100%;
+    }
+
+    input{
+      width: 90%;
+    }
+
+    #submit{
+      width: 90%;
+    }
+  
+  .leaderboard{
+      max-width: 100%;
+      width: 95%;
+    }
+
+    .leaderboard-item{
+      height: 8rem;
+      padding: 0.5rem;
+    }
+
+    .button-container{
+      flex-direction: column;
+
+    }
+}
+
+@media screen and (max-width: 426px){
+  .name, .country, .score{
+    font-size: 0.75rem;
+  }
+  .currentDate{
+    font-size: 0.5rem;
+  }
 }
